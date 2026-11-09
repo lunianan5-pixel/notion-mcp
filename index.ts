@@ -5,12 +5,10 @@ import {
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 import { Client } from "@notionhq/client";
-import express from "express";
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
-const app = express();
 
-app.get("/mcp", async (req, res) => {
+export default async function handler(req: any, res: any) {
   const server = new Server(
     { name: "notion-mcp", version: "1.0.0" },
     { capabilities: { tools: {} } }
@@ -42,8 +40,6 @@ app.get("/mcp", async (req, res) => {
     throw new Error(`Unknown tool: ${request.params.name}`);
   });
 
-  const transport = new SSEServerTransport("/message", res);
+  const transport = new SSEServerTransport("/mcp", res);
   await server.connect(transport);
-});
-
-app.listen(3000);
+}
