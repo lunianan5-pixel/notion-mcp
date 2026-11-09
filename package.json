@@ -4,6 +4,7 @@
   "type": "module",
   "dependencies": {
     "@modelcontextprotocol/sdk": "latest",
-    "@notionhq/client": "latest"
+    "@notionhq/client": "latest",
+    "express": "latest"
   }
 }
